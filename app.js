@@ -15,6 +15,15 @@ var HomeworkSchema = mongoose.Schema({
                     });
 var Homework = mongoose.model("Homework",HomeworkSchema);
 
+// //test homework data
+// var data = {
+//               name:"Homework3",
+//               timeLimit:new Date("2018-07-28"),
+//               status:"failed"
+//             };
+// var newHomework = new Homework(data);
+// newHomework.save();
+
 //Landing Page
 app.get("/",function(req,res){
   res.send("Landing Page");
