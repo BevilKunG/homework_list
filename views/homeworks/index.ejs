@@ -10,24 +10,13 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Homework part -->
-      <tr>
-        <td>homework1</td>
-        <td>1/8/2018</td>
-        <td class="working">Working...</td>
-      </tr>
-
-      <tr>
-        <td>homework2</td>
-        <td>12/9/2018</td>
-        <td class="finished">Completed</td>
-      </tr>
-
-      <tr>
-        <td>homework3</td>
-        <td>28/7/2018</td>
-        <td class="failed">Failed</td>
-      </tr>
+      <% homeworks.forEach(function(homework){ %>
+        <tr>
+          <td><%= homework.name %></td>
+          <td><%= homework.timeLimit %></td>
+          <td><%= homework.status %></td>
+        </tr>
+      <% }); %>
     </tbody>
   </table>
 

@@ -31,7 +31,14 @@ app.get("/",function(req,res){
 
 //Index
 app.get("/homeworks",function(req,res){
-  res.render("homeworks/index");
+  Homework.find({},function(err,allHomework){
+    if(err){
+      console.log(err);
+    }else{
+      res.render("homeworks/index",{homeworks:allHomework});
+    }
+  });
+
 });
 
 
