@@ -14,7 +14,7 @@
       <% homeworks.forEach(function(homework){ %>
         <tr>
           <td><%= homework.name %></td>
-          <td><%= homework.timeLimit %></td>
+          <td><%= homework.timeLimit.toString().slice(3,15) %></td>
           <td><%= homework.status %></td>
         </tr>
       <% }); %>
