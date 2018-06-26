@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 mongoose.connect("mongodb://localhost/homework_list");
 
 app.set("view engine","ejs");
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname+"/public"));
 
 //HomeworkSchema & Homework Model
@@ -40,7 +40,24 @@ app.get("/homeworks",function(req,res){
       res.render("homeworks/index",{homeworks:allHomework});
     }
   });
+});
 
+//New
+app.get("/homeworks/new",function(req,res){
+  res.render("homeworks/new");
+});
+
+//Create
+app.post("/homeworks",function(req,res){
+  var homework = req.body.homework;
+  homework.status = "working";
+  Homework.create(homework,function(err,newHomework){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect("/homeworks");
+    }
+  });
 });
 
 
