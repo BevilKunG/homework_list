@@ -1,0 +1,17 @@
+table{
+  margin:0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.finished{
+  color:green;
+}
+
+.failed{
+  color:red;
+}
+
+.working{
+  color:yellow;
+}
