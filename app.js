@@ -84,6 +84,16 @@ app.put("/homeworks/:id",function(req,res){
   });
 });
 
+//Destroy
+app.delete("/homeworks/:id",function(req,res){
+  Homework.findByIdAndRemove(req.params.id,function(err){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect("/homeworks");
+    }
+  });
+});
 
 //listen
 app.listen(3000,process.env.IP);

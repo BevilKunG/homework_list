@@ -18,6 +18,11 @@
           <td>
             <a href="/homeworks/<%= homework._id %>/edit">Edit</a>
           </td>
+          <td>
+            <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST">
+              <button>Delete</button>
+            </form>
+          </td>
         </tr>
       <% }); %>
     </tbody>
