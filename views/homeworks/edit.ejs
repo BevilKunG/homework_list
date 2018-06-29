@@ -1,5 +1,4 @@
 <% include ../partials/header %>
-  <h1>Edit <%= homework.name %></h1>
 <!-- Change Date format to yyyy-mm-dd for show current value  -->
 <% var date = homework.timeLimit.getDate(),
        month = homework.timeLimit.getMonth()+1,
@@ -7,15 +6,28 @@
 <% if(date<10) date = "0" + date; %>
 <% if(month<10) month = "0" + month; %>
 <!--                                                         -->
-  <form action="/homeworks/<%= homework._id %>?_method=PUT" method="POST">
-    <input type="text" name="homework[name]" value="<%= homework.name %>">
-    <input type="date" name="homework[timeLimit]" value="<%= year %>-<%= month %>-<%= date %>">
-    <select name="homework[status]">
-      <option value="working" <% if(homework.status==="working"){ %> selected <% } %>>working</option>
-      <option value="completed" <% if(homework.status==="completed"){ %> selected <% } %>>completed</option>
-      <option value="failed" <% if(homework.status==="failed"){ %> selected <% } %>>failed</option>
-    </select>
-    <button>Edit</button>
-  </form>
-  <a href="/homeworks">Go Back</a>
+<div class="ui container">
+  <h1 class="ui center aligned header">Edit <%= homework.name %></h1>
+    <form action="/homeworks/<%= homework._id %>?_method=PUT" method="POST" class="ui big form">
+      <div class="field">
+        <label>Homework Name</label>
+        <input type="text" name="homework[name]" value="<%= homework.name %>">
+      </div>
+      <div class="field">
+        <label>Limit Time</label>
+        <input type="date" name="homework[timeLimit]" value="<%= year %>-<%= month %>-<%= date %>">
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select name="homework[status]">
+          <option value="working" <% if(homework.status==="working"){ %> selected <% } %>>working</option>
+          <option value="completed" <% if(homework.status==="completed"){ %> selected <% } %>>completed</option>
+          <option value="failed" <% if(homework.status==="failed"){ %> selected <% } %>>failed</option>
+        </select>
+      </div>
+      <button class="ui yellow button">Edit</button>
+    </form>
+</div>
+
+  <a href="/homeworks" class="ui button">Go Back</a>
 <% include ../partials/footer %>
