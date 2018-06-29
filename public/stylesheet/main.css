@@ -1,3 +1,15 @@
 .delete-form{
   display:inline;
 }
+
+.working{
+  color:#fbbd08;
+}
+
+.completed{
+  color:#21ba45;
+}
+
+.failed{
+  color:#db2828;
+}

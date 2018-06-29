@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 <!-- Change Date format to yyyy-mm-dd for show current value  -->
-<% var date = homework.timeLimit.getDate(),
-       month = homework.timeLimit.getMonth()+1,
-       year = homework.timeLimit.getFullYear(); %>
+<% var date = homework.deadline.getDate(),
+       month = homework.deadline.getMonth()+1,
+       year = homework.deadline.getFullYear(); %>
 <% if(date<10) date = "0" + date; %>
 <% if(month<10) month = "0" + month; %>
 <!--                                                         -->
@@ -14,8 +14,8 @@
         <input type="text" name="homework[name]" value="<%= homework.name %>">
       </div>
       <div class="field">
-        <label>Limit Time</label>
-        <input type="date" name="homework[timeLimit]" value="<%= year %>-<%= month %>-<%= date %>">
+        <label>Deadline</label>
+        <input type="date" name="homework[deadline]" value="<%= year %>-<%= month %>-<%= date %>">
       </div>
       <div class="field">
         <label>Status</label>

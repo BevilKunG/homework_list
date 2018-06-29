@@ -14,7 +14,7 @@ app.use(methodOverride("_method"));
 //HomeworkSchema & Homework Model
 var HomeworkSchema = mongoose.Schema({
                       name:String,
-                      timeLimit:Date,
+                      deadline:Date,
                       status:String
                     });
 var Homework = mongoose.model("Homework",HomeworkSchema);
