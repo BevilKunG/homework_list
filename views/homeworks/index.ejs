@@ -3,7 +3,7 @@
   <div class="ui secondary padded segment">
     <h1>Homework List</h1>
     <p>Homework List reminds you to manage the homework time</p>
-    <a class="ui positive button" href="/homeworks/new">+Add</a>
+    <a class="ui positive button" href="/homeworks/new"><i class="plus icon"></i>Add</a>
   </div>
 
   <table class="ui table">
@@ -22,9 +22,9 @@
           <td><%= homework.timeLimit.toString().slice(3,15) %></td>
           <td><%= homework.status %></td>
           <td>
-            <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit">Edit</a>
+            <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
             <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
-              <button class="ui mini red button">Delete</button>
+              <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
             </form>
           </td>
         </tr>
