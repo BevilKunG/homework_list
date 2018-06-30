@@ -5,7 +5,8 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var moment = require("moment");
 
-mongoose.connect("mongodb://localhost/homework_list");
+// mongoose.connect("mongodb://localhost/homework_list");
+mongoose.connect("mongodb://devilbevilgamer:Bevilgamer4018@ds121461.mlab.com:21461/homework_list");
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -22,7 +23,7 @@ var Homework = mongoose.model("Homework",HomeworkSchema);
 
 //Landing Page
 app.get("/",function(req,res){
-  res.send("Landing Page");
+  res.redirect("/homeworks");
 });
 
 //Index
@@ -88,4 +89,4 @@ app.delete("/homeworks/:id",function(req,res){
 });
 
 //listen
-app.listen(3000,process.env.IP);
+app.listen(process.env.PORT,process.env.IP);
