@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var moment = require("moment");
 
 mongoose.connect("mongodb://localhost/homework_list");
 
@@ -19,15 +20,6 @@ var HomeworkSchema = mongoose.Schema({
                     });
 var Homework = mongoose.model("Homework",HomeworkSchema);
 
-// //test homework data
-// var data = {
-//               name:"Homework3",
-//               timeLimit:new Date("2018-07-28"),
-//               status:"failed"
-//             };
-// var newHomework = new Homework(data);
-// newHomework.save();
-
 //Landing Page
 app.get("/",function(req,res){
   res.send("Landing Page");
@@ -39,7 +31,7 @@ app.get("/homeworks",function(req,res){
     if(err){
       console.log(err);
     }else{
-      res.render("homeworks/index",{homeworks:allHomework});
+      res.render("homeworks/index",{homeworks:allHomework,moment:moment});
     }
   });
 });

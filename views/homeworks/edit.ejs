@@ -2,9 +2,9 @@
 <!-- Change Date format to yyyy-mm-dd for show current value  -->
 <% var date = homework.deadline.getDate(),
        month = homework.deadline.getMonth()+1,
-       year = homework.deadline.getFullYear(); %>
-<% if(date<10) date = "0" + date; %>
-<% if(month<10) month = "0" + month; %>
+       year = homework.deadline.getFullYear();
+   if(date < 10) date = "0" + date;
+   if(month < 10) month = "0" + month; %>
 <!--                                                         -->
 <div class="ui container">
   <h1 class="ui center aligned header">Edit <%= homework.name %></h1>
