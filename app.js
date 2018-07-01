@@ -94,7 +94,7 @@ app.delete("/homeworks/:id",function(req,res){
 //-------------------------------- Stats ---------------------------------------
 //Index
 app.get("/stats",function(req,res){
-  res.send("stats page");
+  res.render("stats/index");
 });
 
 

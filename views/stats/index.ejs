@@ -1,0 +1,27 @@
+<% include ../partials/header %>
+  <div class="canvas-container">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <script type="text/javascript">
+    var canvas = document.querySelector("#chart");
+
+    var data = {
+                  labels:["working","completed","failed"],
+                  datasets:[{
+                              label:"# of Homeworks",
+                              data:[6,4,2],
+                              backgroundColor:[
+                                                "rgba(251, 189, 8, 1)",
+                                                "rgba(33, 186, 69, 1)",
+                                                "rgba(219, 40, 40, 1)"
+                                              ]
+                           }]
+               };
+
+    var chart = new Chart(canvas,{
+                                    type:"doughnut",
+                                    data:data
+                                 });
+  </script>
+<% include ../partials/footer %>
