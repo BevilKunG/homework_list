@@ -108,7 +108,7 @@ app.get("/stats",function(req,res){
             }else{
               //make each count to array of number --> ['workingCount','completedCount','failedCount']
               var homeworkData = "["+workingCount+","+completedCount+","+failedCount+"]";
-              console.log(homeworkData);
+              // console.log(homeworkData);
               res.render("stats/index",{homeworkData:homeworkData});
             }
           });
