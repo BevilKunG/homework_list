@@ -94,7 +94,28 @@ app.delete("/homeworks/:id",function(req,res){
 //-------------------------------- Stats ---------------------------------------
 //Index
 app.get("/stats",function(req,res){
-  res.render("stats/index");
+  Homework.count({status:"working"},function(err,workingCount){
+    if(err){
+      console.log(err);
+    }else{
+      Homework.count({status:"completed"},function(err,completedCount){
+        if(err){
+          console.log(err);
+        }else{
+          Homework.count({status:"failed"},function(err,failedCount){
+            if(err){
+              console.log(err);
+            }else{
+              //make each count to array of number --> ['workingCount','completedCount','failedCount']
+              var homeworkData = "["+workingCount+","+completedCount+","+failedCount+"]";
+              console.log(homeworkData);
+              res.render("stats/index",{homeworkData:homeworkData});
+            }
+          });
+        }
+      });
+    }
+  });
 });
 
 
