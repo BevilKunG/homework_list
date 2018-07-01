@@ -6,7 +6,8 @@ var methodOverride = require("method-override");
 var moment = require("moment");
 
 // mongoose.connect("mongodb://localhost/homework_list");
-mongoose.connect("mongodb://devilbevilgamer:Bevilgamer4018@ds121461.mlab.com:21461/homework_list");
+mongoose.connect(process.env.MONGODBURL);
+
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
