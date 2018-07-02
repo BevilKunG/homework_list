@@ -5,8 +5,8 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var moment = require("moment");
 
-mongoose.connect("mongodb://localhost/homework_list");
-// mongoose.connect(process.env.MONGODBURL);
+// mongoose.connect("mongodb://localhost/homework_list");
+mongoose.connect(process.env.MONGODBURL);
 
 
 app.set("view engine","ejs");
@@ -94,26 +94,11 @@ app.delete("/homeworks/:id",function(req,res){
 //-------------------------------- Stats ---------------------------------------
 //Index
 app.get("/stats",function(req,res){
-  Homework.count({status:"working"},function(err,workingCount){
+  Homework.find({},function(err,foundHomework){
     if(err){
       console.log(err);
     }else{
-      Homework.count({status:"completed"},function(err,completedCount){
-        if(err){
-          console.log(err);
-        }else{
-          Homework.count({status:"failed"},function(err,failedCount){
-            if(err){
-              console.log(err);
-            }else{
-              //make each count to array of number --> ['workingCount','completedCount','failedCount']
-              var homeworkData = "["+workingCount+","+completedCount+","+failedCount+"]";
-              // console.log(homeworkData);
-              res.render("stats/index",{homeworkData:homeworkData});
-            }
-          });
-        }
-      });
+      res.render("stats/index",{homeworks:foundHomework});
     }
   });
 });
@@ -122,4 +107,4 @@ app.get("/stats",function(req,res){
 //------------------------------------------------------------------------------
 
 //listen
-app.listen(3000,process.env.IP);
+app.listen(process.env.PORT,process.env.IP);
