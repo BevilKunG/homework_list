@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var moment = require("moment");
+var Homework = require("./models/homework");
 
 // mongoose.connect("mongodb://localhost/homework_list");
 mongoose.connect(process.env.MONGODBURL);
@@ -14,13 +15,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname+"/public"));
 app.use(methodOverride("_method"));
 
-//HomeworkSchema & Homework Model
-var HomeworkSchema = mongoose.Schema({
-                      name:String,
-                      deadline:Date,
-                      status:String
-                    });
-var Homework = mongoose.model("Homework",HomeworkSchema);
+
 
 //Landing Page
 app.get("/",function(req,res){
