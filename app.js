@@ -11,8 +11,8 @@ var homeworkRoutes = require("./routes/homeworks"),
     indexRoutes    = require("./routes/index");
 
 //Connect Mongoose
-mongoose.connect("mongodb://localhost/homework_list");
-// mongoose.connect(process.env.MONGODBURL);
+mongoose.connect(process.env.MONGODBURL);
+// mongoose.connect("mongodb://localhost/homework_list");
 
 //App Config
 app.set("view engine","ejs");
@@ -27,4 +27,4 @@ app.use(indexRoutes);
 
 
 //listen
-app.listen(3000,process.env.IP);
+app.listen(process.env.PORT,process.env.IP);
