@@ -9,6 +9,7 @@ var Homework = require("./models/homework");
 
 //Routes
 var homeworkRoutes = require("./routes/homeworks");
+var statRoutes = require("./routes/stats");
 
 mongoose.connect("mongodb://localhost/homework_list");
 // mongoose.connect(process.env.MONGODBURL);
@@ -27,21 +28,11 @@ app.get("/",function(req,res){
 });
 
 app.use(homeworkRoutes);
-
-//-------------------------------- Stats ---------------------------------------
-//Index
-app.get("/stats",function(req,res){
-  Homework.find({},function(err,foundHomework){
-    if(err){
-      console.log(err);
-    }else{
-      res.render("stats/index",{homeworks:foundHomework,moment:moment});
-    }
-  });
-});
+app.use(statRoutes);
 
 
-//------------------------------------------------------------------------------
+
+
 
 //listen
 app.listen(3000,process.env.IP);
