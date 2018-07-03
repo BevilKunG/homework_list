@@ -1,37 +1,29 @@
-var express = require("express");
-var app = express();
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
-var moment = require("moment");
-var Homework = require("./models/homework");
+var express        = require("express"),
+    app            = express(),
+    bodyParser     = require("body-parser"),
+    methodOverride = require("method-override"),
+    mongoose       = require("mongoose");
 
 
-//Routes
-var homeworkRoutes = require("./routes/homeworks");
-var statRoutes = require("./routes/stats");
+//Require Routes
+var homeworkRoutes = require("./routes/homeworks"),
+    statRoutes     = require("./routes/stats"),
+    indexRoutes    = require("./routes/index");
 
+//Connect Mongoose
 mongoose.connect("mongodb://localhost/homework_list");
 // mongoose.connect(process.env.MONGODBURL);
 
-
+//App Config
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname+"/public"));
 app.use(methodOverride("_method"));
 
-
-
-//Landing Page
-app.get("/",function(req,res){
-  res.redirect("/homeworks");
-});
-
+//Routes
 app.use(homeworkRoutes);
 app.use(statRoutes);
-
-
-
+app.use(indexRoutes);
 
 
 //listen

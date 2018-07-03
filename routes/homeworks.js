@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
-var Homework = require("../models/homework");
-var moment = require("moment");
+var express  = require("express"),
+    router   = express.Router(),
+    Homework = require("../models/homework"),
+    moment   = require("moment");
 
 //Index
 router.get("/homeworks",function(req,res){
