@@ -1,32 +1,55 @@
 <% include ../partials/header %>
 <!-- Status Count & Prepare Data for Chart -->
 <%
+  var monthlyCount  = [0,0,0,0,0,0,0,0,0,0,0,0],
+      currentYear   = moment().format("YYYY");
+
   var workingCount   = 0,
       completedCount = 0,
       failedCount    = 0;
+
   homeworks.forEach(function(homework){
+    var deadlineYear = moment(homework.deadline).format("YYYY");
+
     if(homework.status === "working") workingCount++;
-    if(homework.status === "completed") completedCount++;
+    if(homework.status === "completed"){
+      completedCount++;
+
+      if(deadlineYear === currentYear){
+        var deadlineMonth = moment(homework.deadline).format("M");
+        monthlyCount[deadlineMonth-1]++;
+      }
+    }
     if(homework.status === "failed") failedCount++;
   });
-  var countData = "["+workingCount+","+completedCount+","+failedCount+"]";
+  var progressChartData = "["+workingCount+","+completedCount+","+failedCount+"]";
+
+  var successChartData = "["+monthlyCount[0];
+  for(var i = 1;i < monthlyCount.length;i++){
+      successChartData+=(","+monthlyCount[i]);
+  }
+  successChartData+="]";
+  var maxSuccess = Math.max(...monthlyCount)+1;
 %>
 
   <div class="ui container">
-      <h1>Progress Chart</h1>
       <div class="canvas-container">
-        <canvas id="chart"></canvas>
+        <h1>Progress Chart</h1>
+        <canvas id="progress-chart"></canvas>
+        <h1>Success Chart</h1>
+        <canvas id="success-chart"></canvas>
       </div>
   </div>
 
   <script type="text/javascript">
-    var canvas = document.querySelector("#chart");
+  // Progress Chart
+    var progressChartCanvas = document.querySelector("#progress-chart");
 
-    var data = {
+    var progressData = {
                   labels:["working","completed","failed"],
                   datasets:[{
                               label:"# of Homeworks",
-                              data:<%= countData %>,
+                              data:<%= progressChartData %>,
                               backgroundColor:[
                                                 "rgba(251, 189, 8, 1)",
                                                 "rgba(33, 186, 69, 1)",
@@ -35,9 +58,67 @@
                            }]
                };
 
-    var chart = new Chart(canvas,{
+    var progressChart = new Chart(progressChartCanvas,{
                                     type:"doughnut",
-                                    data:data
+                                    data:progressData
                                  });
+ // Success Chart
+ var successChartCanvas = document.querySelector("#success-chart");
+
+ var successData = {
+                labels:["January","February","March","April","May","June","July","August","September","October","November","December"],
+                datasets:[{
+                            label:"Completed Homeworks",
+                            data:<%= successChartData %>,
+                            backgroundColor:[
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)",
+                                              "rgba(33, 186, 69, 0.2)"
+                                            ],
+                            borderColor:[
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)",
+                                              "rgba(33, 186, 69, 1)"
+                                            ],
+                          borderWidth:1
+                         }]
+             };
+
+var successOption = {
+                scales:{
+                        yAxes:[{
+                                ticks:{
+                                        stepSize:1,
+                                        min:0,
+                                        max:<%= maxSuccess %>
+                                      }
+                              }]
+                       }
+              }
+var successChart = new Chart(successChartCanvas,{
+                                type:"bar",
+                                data:successData,
+                                options:successOption
+                            });
+
+
   </script>
 <% include ../partials/footer %>

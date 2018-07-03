@@ -20,3 +20,7 @@
   height: 20vh;
   width: 40vw;
 }
+
+#progress-chart,#success-chart{
+  margin-bottom: 50%;
+}

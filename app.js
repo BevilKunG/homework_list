@@ -98,7 +98,7 @@ app.get("/stats",function(req,res){
     if(err){
       console.log(err);
     }else{
-      res.render("stats/index",{homeworks:foundHomework});
+      res.render("stats/index",{homeworks:foundHomework,moment:moment});
     }
   });
 });
