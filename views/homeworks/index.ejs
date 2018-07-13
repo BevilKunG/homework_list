@@ -6,46 +6,42 @@
     <a class="ui positive button" href="/homeworks/new"><i class="plus icon"></i>Add</a>
   </div>
 
-  <table class="ui table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Deadline</th>
-        <th>Time Left</th>
-        <th>Status</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% homeworks.forEach(function(homework){ %>
-        <!-- Change Date format to dd/mm/yyyy   -->
-        <% var date = homework.deadline.getDate(),
-               month = homework.deadline.getMonth()+1,
-               year = homework.deadline.getFullYear();
-           if(date < 10) date = "0" + date;
-           if(month < 10) month = "0" + month; %>
-        <!--                                     -->
-        <tr>
-          <td><%= homework.name %></td>
-          <td><%= date %>/<%= month %>/<%= year %></td>
-          <td>
-              <% if(moment().isBefore(homework.deadline)){ %>
-                <%= moment().to(homework.deadline); %>
-              <% }else{ %>
-                <%= "Time Up!" %>
-              <% } %>
-          </td>
-          <td class="<%= homework.status %>"><%= homework.status %></td>
-          <td>
-            <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
-            <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
-              <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
-            </form>
-          </td>
-        </tr>
-      <% }); %>
-    </tbody>
-  </table>
+  <div class="ui grid container">
+    <div class="five column row">
+      <div class="column ui header">Name</div>
+      <div class="column ui header">Deadline</div>
+      <div class="column ui header">Time Remaining</div>
+      <div class="column ui header">Status</div>
+      <div class="column ui header"></div>
+    </div>
+    <% homeworks.forEach(function(homework){ %>
+      <!-- Change Date format to dd/mm/yyyy   -->
+      <% var date = homework.deadline.getDate(),
+             month = homework.deadline.getMonth()+1,
+             year = homework.deadline.getFullYear();
+         if(date < 10) date = "0" + date;
+         if(month < 10) month = "0" + month; %>
+      <!--                                     -->
+      <div class="five column row">
+        <div class="column"><%= homework.name %></div>
+        <div class="column"><%= date %>/<%= month %>/<%= year %></div>
+        <div class="column">
+          <% if(moment().isBefore(homework.deadline)){ %>
+            <%= moment().to(homework.deadline); %>
+          <% }else{ %>
+            <%= "Time Up!" %>
+          <% } %>
+        </div>
+        <div class="column <%= homework.status %>"><%= homework.status %></div>
+        <div class="column">
+          <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
+          <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
+            <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
 </div>
 
 <% include ../partials/footer %>
