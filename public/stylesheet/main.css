@@ -29,6 +29,10 @@
   border: 10px solid #21ba45;
 }
 
+.failed-part{
+  border: 10px solid #db2828;
+}
+
 #progress-chart,#success-chart{
   margin-bottom: 50%;
 }
