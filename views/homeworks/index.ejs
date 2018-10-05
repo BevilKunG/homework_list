@@ -24,24 +24,27 @@
            if(date < 10) date = "0" + date;
            if(month < 10) month = "0" + month; %>
         <!--                                     -->
-        <div class="five column row">
-          <div class="column"><%= homework.name %></div>
-          <div class="column"><%= date %>/<%= month %>/<%= year %></div>
-          <div class="column">
-            <% if(moment().isBefore(homework.deadline)){ %>
-              <%= moment().to(homework.deadline); %>
-            <% }else{ %>
-              <%= "Time Up!" %>
-            <% } %>
+        <% if(homework.status == "working"){ %>
+          <div class="five column row">
+            <div class="column"><%= homework.name %></div>
+            <div class="column"><%= date %>/<%= month %>/<%= year %></div>
+            <div class="column">
+              <% if(moment().isBefore(homework.deadline)){ %>
+                <%= moment().to(homework.deadline); %>
+              <% }else{ %>
+                <%= "Time Up!" %>
+              <% } %>
+            </div>
+            <div class="column <%= homework.status %>"><%= homework.status %></div>
+            <div class="column">
+              <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
+              <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
+                <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
+              </form>
+            </div>
           </div>
-          <div class="column <%= homework.status %>"><%= homework.status %></div>
-          <div class="column">
-            <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
-            <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
-              <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
-            </form>
-          </div>
-        </div>
+        <% } %>
+
       <% }) %>
     </div>
 
