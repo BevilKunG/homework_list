@@ -25,6 +25,9 @@
   border: 10px solid #fbbd08;
 }
 
+.completed-part{
+  border: 10px solid #21ba45;
+}
 
 #progress-chart,#success-chart{
   margin-bottom: 50%;

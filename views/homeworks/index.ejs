@@ -50,8 +50,8 @@
 
 
 
-    <div class="ui grid container">
-      <h1>Successed homeworks</h1>
+    <div class="ui grid container completed-part">
+      <h1 class="ui green header">Completed homeworks</h1>
       <div class="four column row">
         <div class="column ui header">Name</div>
         <div class="column ui header">Deadline</div>
@@ -66,17 +66,20 @@
            if(date < 10) date = "0" + date;
            if(month < 10) month = "0" + month; %>
         <!--                                     -->
-        <div class="four column row">
-          <div class="column"><%= homework.name %></div>
-          <div class="column"><%= date %>/<%= month %>/<%= year %></div>
-          <div class="column <%= homework.status %>"><%= homework.status %></div>
-          <div class="column">
-            <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
-            <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
-              <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
-            </form>
+        <% if(homework.status == "completed"){ %>
+          <div class="four column row">
+            <div class="column"><%= homework.name %></div>
+            <div class="column"><%= date %>/<%= month %>/<%= year %></div>
+            <div class="column <%= homework.status %>"><%= homework.status %></div>
+            <div class="column">
+              <a class="ui mini yellow button" href="/homeworks/<%= homework._id %>/edit"><i class="edit icon"></i>Edit</a>
+              <form action="/homeworks/<%= homework._id %>?_method=DELETE" method="POST" class="delete-form">
+                <button class="ui mini red button"><i class="trash alternate icon"></i>Delete</button>
+              </form>
+            </div>
           </div>
-        </div>
+        <% } %>
+
       <% }) %>
     </div>
 
