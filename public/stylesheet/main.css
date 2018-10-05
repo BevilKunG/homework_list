@@ -21,6 +21,11 @@
   width: 40vw;
 }
 
+.working-part{
+  border: 10px solid #fbbd08;
+}
+
+
 #progress-chart,#success-chart{
   margin-bottom: 50%;
 }
