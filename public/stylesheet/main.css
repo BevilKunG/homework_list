@@ -35,7 +35,7 @@
 
 .ui.grid.container.working-part,.ui.grid.container.completed-part,.ui.grid.container.failed-part{
   margin: 5% 0;
-  /* background: white; */
+  background: white;
 }
 
 body{
