@@ -32,7 +32,7 @@
               <% if(moment().isBefore(homework.deadline)){ %>
                 <%= moment().to(homework.deadline); %>
               <% }else{ %>
-                <%= "Time Up!" %>
+                <%= "Time is Up!" %>
               <% } %>
             </div>
             <div class="column <%= homework.status %>"><%= homework.status %></div>
